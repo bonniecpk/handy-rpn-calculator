@@ -9,15 +9,21 @@ module Handy
 
     def calculate
       stack = RPNStack.new
+      
       @inputs.each do |component|
         if stack.size < 2
-          raise SyntaxError.new("Not enough operands before operator:#{component}, stack:#{stack}") if component == Component::OPERATOR
+          raise SyntaxError.new("Not enough operands before operator:#{component}, stack:#{stack}") if component.type == Component::OPERATOR
           stack << component
         else
-          stack.eval(operator) if component == Component::OPERATOR
-          #stack.pop_parenthesis if component.class == CloseParenthesis
+          if component.type == Component::OPERATOR
+            stack.calculate(component)
+          else
+            stack << component
+          end
         end
       end
+
+      stack.pop.to_i
     end
   end
 end
