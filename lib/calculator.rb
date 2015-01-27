@@ -4,7 +4,7 @@ module Handy
   class RPNCalculator
     # Assume the expression is delimited by spaces
     def initialize(expression)
-      @inputs = expression.split.collect { |comp| ComponentFactory.categorize(comp) }
+      @inputs = expression.split.collect { |comp| Component.new(comp) }
     end
 
     def calculate

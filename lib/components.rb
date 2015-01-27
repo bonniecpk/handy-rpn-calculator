@@ -5,9 +5,17 @@ module Handy
 
     attr_reader :type
 
-    def initialize(op, type)
-      @value = op
-      @type  = type
+    def initialize(op)
+      @value = op.to_s
+      @type  = if op.is_a? Integer
+                 Component::OPERAND
+               elsif /^[0-9]+$/ =~ op
+                 Component::OPERAND
+               elsif /^[+\-*\/]$/ =~ op
+                 Component::OPERATOR
+               else
+                 raise InvalidComponent.new("#{op} is invalid")
+               end
     end
 
     def to_s
@@ -16,21 +24,6 @@ module Handy
 
     def to_i
       @value.to_i
-    end
-  end
-
-  class ComponentFactory
-    class << self
-      def categorize(comp)
-        type = if /^[0-9]+$/ =~ comp
-                 Component::OPERAND
-               elsif /^[+\-*\/]$/ =~ comp
-                 Component::OPERATOR
-               else
-                 raise InvalidOperand.new("#{comp} is invalid")
-               end
-        Component.new(comp, type)
-      end
     end
   end
 end

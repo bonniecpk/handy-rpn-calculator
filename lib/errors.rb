@@ -1,4 +1,4 @@
 module Handy
   class SyntaxError < StandardError; end
-  class InvalidOperand < StandardError; end
+  class InvalidComponent < StandardError; end
 end
