@@ -3,7 +3,7 @@ require_relative '../spec_helper'
 module Handy
   describe RPNCalculator do
     context "#calcuate" do
-      context "Good syntax" do
+      context "Good RPN syntax" do
         pairs = {
           "3 2 +"          => 5,
           "2 3 + 5 + 10 -" => 0,
@@ -18,7 +18,7 @@ module Handy
         end
       end
 
-      context "Bad syntax" do
+      context "Bad RPN syntax" do
         bad_syntaxes = [
           '2 2',
           '2 3 4',
