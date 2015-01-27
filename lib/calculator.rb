@@ -12,7 +12,9 @@ module Handy
       
       @inputs.each do |component|
         if stack.size < 2
-          raise SyntaxError.new("Not enough operands before operator:#{component}, stack:#{stack}") if component.type == Component::OPERATOR
+          if component.type == Component::OPERATOR
+            raise SyntaxError.new("Not enough operands before operator:#{component}, stack:#{stack}")
+          end
           stack << component
         else
           if component.type == Component::OPERATOR
