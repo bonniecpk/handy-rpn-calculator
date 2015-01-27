@@ -23,6 +23,8 @@ module Handy
         end
       end
 
+      raise SyntaxError.new("There're remaining components in the stack: #{stack}") if stack.size > 1
+
       stack.pop.to_i
     end
   end
