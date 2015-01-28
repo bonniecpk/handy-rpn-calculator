@@ -5,6 +5,8 @@ module Handy
     # Assume the expression is delimited by spaces
     def initialize(expression)
       @inputs = expression.split.collect { |comp| Component.new(comp) }
+    rescue InvalidComponent => e
+      raise SyntaxError.new(e.message)
     end
 
     def calculate
@@ -13,7 +15,7 @@ module Handy
       @inputs.each do |component|
         if stack.size < 2
           if component.type == Component::OPERATOR
-            raise SyntaxError.new("Not enough operands before operator:#{component}, stack:#{stack}")
+            raise SyntaxError.new("Not enough operands before operator: #{component} [stack: #{stack}]")
           end
           stack << component
         else
@@ -25,9 +27,11 @@ module Handy
         end
       end
 
-      raise SyntaxError.new("There're remaining components in the stack: #{stack}") if stack.size > 1
+      raise SyntaxError.new("Operator is needed to calculate [stack: #{stack}]") if stack.size > 1
 
-      stack.pop.to_i
+      stack.pop.to_f
+    rescue InvalidComponent => e
+      raise SyntaxError.new(e.message)
     end
   end
 end

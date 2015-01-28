@@ -9,6 +9,12 @@ module Handy
         expect(comp.type).to eq(Component::OPERAND)
       end
 
+      it 'float' do
+        comp = Component.new(3.3)
+        expect(comp.to_s).to eq('3.3')
+        expect(comp.type).to eq(Component::OPERAND)
+      end
+
       it 'operand' do
         comp = Component.new('3')
         expect(comp.to_s).to eq('3')

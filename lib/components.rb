@@ -9,7 +9,9 @@ module Handy
       @value = op.to_s
       @type  = if op.is_a? Integer
                  Component::OPERAND
-               elsif /^[0-9]+$/ =~ op
+               elsif op.is_a? Float
+                 Component::OPERAND
+               elsif /^[0-9]*\.?[0-9]+$/ =~ op
                  Component::OPERAND
                elsif /^[+\-*\/]$/ =~ op
                  Component::OPERATOR
@@ -22,8 +24,8 @@ module Handy
       @value
     end
 
-    def to_i
-      @value.to_i
+    def to_f
+      @value.to_f
     end
   end
 end

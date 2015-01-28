@@ -10,7 +10,7 @@ module Handy
         raise SyntaxError.new("#{operand1} #{operand2} #{operator} is invalid")
       end
 
-      self << Component.new(eval("#{operand1} #{operator} #{operand2}"))
+      self << Component.new(eval("#{operand1.to_f} #{operator} #{operand2}"))
 
       self
     end
