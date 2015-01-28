@@ -12,7 +12,7 @@ module Handy
 
       it '3 + 2' do
         stack = stack('3', '2')
-        expect(stack.calculate(Component.new('+')).pop.to_i).to eq(5)
+        expect(stack.calculate(Component.new('+')).pop.to_f).to eq(5)
       end
 
       it '+ + 2' do
