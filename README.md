@@ -6,6 +6,7 @@
 
 ###Setup
     [host]$ git clone git@github.com:bonniecpk/handy-rpn-calculator.git
+    [host]$ cd handy-rpn-calculator
     [host]$ bundle
 
 ###To run
