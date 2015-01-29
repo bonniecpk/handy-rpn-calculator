@@ -4,7 +4,7 @@ module Handy
   class RPNCalculator
     # Assume the expression is delimited by spaces
     def initialize(expression)
-      @inputs = expression.strip.gsub(/^\(+|\)+$/, '').split.collect { |comp| Component.new(comp) }
+      @inputs = expression.strip.split.collect { |comp| Component.new(comp) }
     rescue InvalidComponent => e
       raise SyntaxError.new(e.message)
     end
